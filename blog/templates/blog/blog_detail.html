@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block title %}{{ blog_details.title }}{% endblock %}
+{% load staticfiles %}
+{% block header_extends %}<link rel="stylesheet" href="{% static 'css/blog/blog.css' %}">{% endblock %}
+
+{# 页面主体内容 #}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                <h3>{{ blog_details.title }}</h3>
+                <ul class="blog-info-description">
+                    <li>作者：{{ blog_details.author }}</li>
+                    <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="{% url 'blog_with_type' blog_details.blog_type.pk %}">{{ blog_details.blog_type }}</a></li>
+                    <li>创建日期：{{ blog_details.created_time|date:"Y-m-d H:n:s" }}</li>
+                    <li>更新日期：{{ blog_details.last_updated_time|date:"Y-m-d H:n:s" }}</li>
+                </ul>
+                <div class="blog-content">{{ blog_details.content }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
